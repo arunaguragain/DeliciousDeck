@@ -15,8 +15,8 @@ const MainPage = () => {
       <nav className="navbar">
         <div className="logo" onClick={toggleSidebar}></div>
         <div className="nav-links">
-          <button onClick={() => navigate('/')}>Home</button>
-          <button onClick={() => navigate('/about')}>About Us</button>
+          <button onClick={() => navigate('/mainpage')}>Home</button>
+          <button onClick={() => navigate('/aboutus')}>About Us</button>
           <button onClick={() => navigate('/contact')}>Contact Us</button>
         </div>
       </nav>
