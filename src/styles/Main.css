@@ -1,0 +1,157 @@
+/* Main.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .main-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .navbar {
+    width: 100%;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: rgb(240, 251, 240);
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(36, 31, 31, 0.1);
+  }
+  
+  .logo {
+    cursor: pointer;
+    background-image: url("src/pictures/DELICIOUS.png") ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 110px;
+  }
+  
+  .nav-links button {
+    background-color: transparent;
+    border: none;
+    color: rgb(73, 37, 37);
+    font-size: 16px;
+    margin: 0 15px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links button:hover {
+    color: #af3f3f;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #a7a88e;
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 1000;
+    
+  }
+  
+  .sidebar.visible {
+    left: 0;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    padding: 15px;
+  }
+  
+  .sidebar button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .sidebar button:hover {
+    background-color: #575757;
+  }
+  
+  .contents {
+    padding: 40px;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    background: url('../pictures/main.png') no-repeat, linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    background-size: cover;
+    height: 100%;
+  }
+  
+  .contents h1 {
+    font-size: 36px;
+    /* color: #333; */
+    color: beige;
+
+  }
+  
+  .contents p {
+    font-size: 18px;
+    /* color: #555; */
+    color: beige;
+    margin-top: 20px;
+  }
+  
+  .cta-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-btn:hover {
+    background-color: #45a049;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .nav-links {
+      display: none;
+    }
+  
+    .sidebar button {
+      font-size: 16px;
+    }
+  
+    .contents h1 {
+      font-size: 28px;
+    }
+  
+    .contents p {
+      font-size: 16px;
+    }
+  }
+  
+  

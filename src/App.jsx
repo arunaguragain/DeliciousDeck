@@ -6,6 +6,7 @@ function App() {
   const Dashboard = React.lazy(() => import("./public/Dashboard"));
   const Login = React.lazy(() => import("./public/Login"));
   const Signup = React.lazy(()=> import("./public/Signup"));
+  const MainPage = React.lazy(() => import('./private/Main'));
  
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
          <Route path='/dashboard' element={<Dashboard/>}></Route>
          <Route path="/login" element={<Login/>}></Route>
          <Route path="/signup" element={<Signup/>}></Route>
+         <Route path='/mainpage' element={<MainPage/>}></Route>
         </Routes>
       </Suspense>
     </Router>

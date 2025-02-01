@@ -12,7 +12,6 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      
       <div className="background-image">
         <div className="overlay">
           <main>
