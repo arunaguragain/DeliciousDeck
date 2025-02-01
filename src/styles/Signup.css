@@ -1,0 +1,153 @@
+.signup-main {
+    width: 100%; 
+    height: 100vh; 
+    display: flex; 
+    align-items: center; 
+    position: relative;
+    flex-direction: column;
+    background-color: beige;
+    gap: 25px;
+    
+} 
+.signup-nav{
+    width: 100%;
+    height:110px;
+    display: flex;
+    position: relative;
+    background-color: white;
+    box-shadow: 0 4px 10px solid rgba(36, 31, 31, 0.1);
+
+}
+.signup-logo{
+    background-image: url("src/pictures/DELICIOUS.png");
+    background-size: contain; 
+    height: 110px;
+    width: 110px;
+    background-repeat: no-repeat;
+}
+.signup-contents{
+    display: flex;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.5); 
+    box-shadow: 0 4px 10px solid rgba(12, 12, 12, 0.1);
+    width: 100%;
+    max-width: 1000px;
+    background-color: lightgrey;
+    flex-direction: row;
+    gap: 120px;
+}
+.signup-picture{
+    background-image: url(src/pictures/login.jpeg);
+    background-size: cover;
+    width: 350px;
+    height: 575px;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 18px;
+}
+
+label {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+
+.btn {
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: maroon;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(108, 99, 255, 0.2);
+}
+
+.btn:hover {
+    background-color: #5248c7;
+}
+
+a {
+    font-size: 14px;
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #444;
+}
+
+
+@media (max-width: 768px) {
+    .contents {
+        flex-direction: column; 
+        gap: 20px; 
+    }
+
+    .picture {
+        width: 100%; 
+        height: 300px; 
+    }
+
+    form {
+        width: 100%; 
+    }
+}
+
+@media (max-width: 480px) {
+    .nav {
+        height: 80px; 
+    }
+
+    .logo {
+        height: 70px; 
+        width: 70px;
+    }
+
+    h2 {
+        font-size: 18px; 
+    }
+
+    input, .btn {
+        font-size: 12px; 
+        padding: 8px 20px; 
+    }
+
+    .btn {
+        padding: 10px 20px;
+    }
+
+    p {
+        font-size: 12px; 
+    }
+}
+
+
+
+
+
+
+
+
+
+
