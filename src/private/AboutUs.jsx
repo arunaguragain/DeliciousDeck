@@ -17,12 +17,12 @@ const AboutUsPage = () => {
       </nav>
 
       <div className="about-content">
-        <h1>About Delicious Deck</h1>
+        <h1>About Us</h1>
         <p>Welcome to Delicious Deck, where we bring you the authentic flavors of Nepal, infused with fresh ingredients and prepared with love.</p>
 
         <section className="mission-section">
           <h2>Our Mission</h2>
-          <p>At Delicious Deck, our mission is to provide a serene dining experience by offering mouthwatering Nepalese vegetarian cuisine in a peaceful, rustic setting. We prioritize fresh, locally sourced ingredients to ensure every meal is made with care and quality.</p>
+          <p>At Delicious Deck, our mission is to provide a serene dining experience by offering mouthwatering Nepalese vegetarian cuisine in a peaceful, rustic setting. We prioritize fresh, locally sourced ingredients to ensure every meal is made with care and quality. Whether you dine with us in our cozy restaurant or enjoy our food delivered to your doorstep, our goal is to bring the flavors of Nepal to you, wherever you are.</p>
         </section>
 
         <section className="values-section">
@@ -34,23 +34,6 @@ const AboutUsPage = () => {
             <li><strong>Community:</strong> We aim to create a space where people can gather, enjoy delicious food, and form lasting connections.</li>
           </ul>
         </section>
-
-        {/* <section className="team-section">
-          <h2>Meet Our Team</h2>
-          <p>Our team is passionate about bringing you the best Nepalese vegetarian food, providing excellent service, and ensuring that every guest leaves with a smile.</p>
-          <div className="team-members">
-            <div className="team-member">
-              <img src="path/to/chef-image.jpg" alt="Chef" />
-              <p><strong>Chef [Name]</strong> - Head Chef</p>
-              <p>Our head chef brings years of experience in Nepalese cuisine and ensures that each dish is prepared to perfection.</p>
-            </div>
-            <div className="team-member">
-              <img src="path/to/manager-image.jpg" alt="Manager" />
-              <p><strong>[Manager Name]</strong> - Restaurant Manager</p>
-              <p>The restaurant manager ensures smooth operations and provides a friendly and welcoming atmosphere for all guests.</p>
-            </div>
-          </div>
-        </section> */}
 
         <div className="cta-section">
           <h3>Come Visit Us and Experience Nepalese Cuisine Like Never Before!</h3>
