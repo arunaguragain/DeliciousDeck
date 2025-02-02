@@ -24,7 +24,7 @@ const MainPage = () => {
       <div className={`sidebar ${sidebarVisible ? 'visible' : ''}`}>
         <ul>
           <li><button onClick={() => navigate('/menu')}>Menu</button></li>
-          <li><button onClick={() => navigate('/book-table')}>Book Table</button></li>
+          <li><button onClick={() => navigate('/book-table')}>Book A Table</button></li>
           <li><button onClick={() => navigate('/reviews')}>Reviews</button></li>
           <li><button onClick={() => navigate('/profile')}>Profile</button></li>
           <li><button onClick={toggleSidebar}>Close</button></li>
