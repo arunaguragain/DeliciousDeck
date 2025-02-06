@@ -1,240 +1,283 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    background-image: url('');
-    background-size: c;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .navbar {
-    width: 100%;
-    height: 110px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    background-color: rgb(240, 251, 240);
-    justify-content: space-between;
-    box-shadow: 0 4px 10px rgba(36, 31, 31, 0.1);
-  }
-  
-  .logo {
-    cursor: pointer;
-    background-image: url("src/pictures/DELICIOUS.png") ;
-    background-size: contain;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: 110px;
-  }
-  
-  .nav-links button {
-    background-color: transparent;
-    border: none;
-    color: rgb(73, 37, 37);
-    font-size: 16px;
-    margin: 0 15px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-links button:hover {
-    color: #af3f3f;
-  }
-  
-  .profile{
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  background-image: url('../pictures/home.png');
+}
 
-  }
-  
-  /* .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  } */
-  
+.navbar {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(240, 251, 240);
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(36, 31, 31, 0.1);
+  position: relative;
+}
 
-  .profile-card {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  .profile-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .profile-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-  }
-  
-  .user-details h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
-  }
-  
-  .user-details p {
-    font-size: 14px;
-    color: #777;
-  }
-  
-  .edit-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .edit-btn:hover {
-    background-color: #45a049;
-  }
-  
-  .user-actions {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  .action-card {
-    background-color: #fff;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 200px;
-  }
-  
-  .action-card img {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 10px;
-  }
-  
-  .action-card span {
-    font-size: 16px;
-    color: #333;
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-  }
+.logo {
+  cursor: pointer;
+  background-image: url("../pictures/DELICIOUS.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100px;
+  width: 110px;
+}
 
-  .edit-form input {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .save-btn {
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .save-btn:hover {
-    background-color: #007bb5;
-  }
+.nav-links button {
+  background-color: transparent;
+  border: none;
+  color: rgb(73, 37, 37);
+  font-size: 16px;
+  margin: 0 15px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-links button:hover {
+  color: #af3f3f;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  position: fixed;
+  top: 110px;
+  left: -250px;
+  height: 100%;
+  padding: 20px;
+  transition: left 0.3s ease-in-out;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.sidebar button:hover {
+  background-color: #34495e;
+}
+
+.sidebar button img {
+  width: 20px;
+}
+
+
+/* Close Button */
+.sidebar close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.profile{
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-card {
+  /* background-color: beige; */
+  padding: 30px;
+  height: 350px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.profile-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 .profile-img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-    cursor: pointer;
-    object-fit: cover;
-    border: 2px solid #ddd;
-    transition: 0.3s;
-  }
-  
-  .profile-img:hover {
-    opacity: 0.8;
-  }
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
 
-  #profile-upload {
-    display: none;
-  }
-  
+.user-details h2 {
+  color: beige;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.user-details p {
+  font-size: 16px;
+  /* color: #777; */
+  color: beige;
+  margin-bottom: 10px;
+}
+
+.edit-btn {
+  background-color: #4CAF50;
+  color: beige;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+}
+
+.user-actions {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.action-card {
+  background-color: #fff;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 200px;
+}
+
+.action-card img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.action-card span {
+  font-size: 16px;
+  color: #333;
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.edit-form input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.save-btn {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.save-btn:hover {
+  background-color: #007bb5;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid #ddd;
+  transition: 0.3s;
+}
+
+.profile-img:hover {
+  opacity: 0.8;
+}
+
+#profile-upload {
+  display: none;
+}
+
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.confirm-btn,
+.cancel-btn {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.confirm-btn {
+  background-color: green;
+  border: none;
+}
+
+.cancel-btn {
+  background-color: #d32f2f;
+  border: none;
+}
+
+.cancel-btn:hover {
+  background-color: #9b5d5d;
+}
+
+.confirm-btn:hover {
+  background-color: rgb(109, 181, 109);
+}
+
+@media (max-width: 768px) {
+  .user-actions {
+    flex-direction: column;
     align-items: center;
-    z-index: 1000;
   }
-  
-  .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .modal-content h2 {
-    margin-bottom: 20px;
-  }
-  
-  .confirm-btn,
-  .cancel-btn {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .confirm-btn {
-    background-color: green;
-    border: none;
-  }
-  
-  .cancel-btn {
-    background-color: #d32f2f;
-    border: none;
-  }
-
-  .cancel-btn:hover {
-    background-color: #9b5d5d;
-  }
-
-  .confirm-btn:hover {
-    background-color: rgb(109, 181, 109);
-  }
-  
-  @media (max-width: 768px) {
-    .user-actions {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  
+}

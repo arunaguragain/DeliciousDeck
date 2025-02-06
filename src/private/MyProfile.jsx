@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import * as Yup from "yup"; 
-import { yupResolver } from "@hookform/resolvers/yup"; 
-import '../styles/MyProfile.css';
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import "../styles/MyProfile.css";
 
 const schema = Yup.object().shape({
   fullname: Yup.string().required("Full Name is required"),
   DOB: Yup.date().required("Date of Birth is required"),
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
+  email: Yup.string().email("Invalid email format").required("Email is required"),
   address: Yup.string().required("Address is required"),
   contact: Yup.string().required("Contact is required"),
 });
@@ -18,7 +16,9 @@ const schema = Yup.object().shape({
 const ProfilePage = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [editing, setEditing] = useState(false);
-  const [showModal, setShowModal] = useState(false); 
+  const [showModal, setShowModal] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false); // Sidebar toggle state
+
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
@@ -30,7 +30,7 @@ const ProfilePage = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setProfilePic(reader.result); 
+        setProfilePic(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -47,30 +47,39 @@ const ProfilePage = () => {
   };
 
   const handleLogoutClick = () => {
-    setShowModal(true); 
+    setShowModal(true);
   };
 
   const handleLogoutConfirm = () => {
-    navigate('/login'); 
-    setShowModal(false); 
+    navigate("/login");
+    setShowModal(false);
   };
 
   const handleLogoutCancel = () => {
-    setShowModal(false); 
+    setShowModal(false);
   };
 
-  const handleNavigation = (path) => {
-    navigate(path);
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
   };
 
   return (
     <div className="container">
+ 
+      <div className={`sidebar ${sidebarOpen ? "active" : ""}`}>
+        <button className="close-btn" onClick={toggleSidebar}>✖</button>
+        <button onClick={() => navigate('/orders')}>📦 My Orders</button>
+        <button onClick={() => navigate('/favorites')}>❤️ Favorites</button>
+        <button onClick={() => navigate('/tables')}>🍽️ My Table</button>
+        <button className="logout-btn" onClick={handleLogoutClick}>🚪 Logout</button>
+      </div>
+
       <div className="navbar">
-        <div className="logo"></div>
+        <div className="logo" onClick={toggleSidebar}></div>
         <div className="nav-links">
-          <button onClick={() => navigate('/mainpage')}>Home</button>
-          <button onClick={() => navigate('/aboutus')}>About Us</button>
-          <button onClick={() => navigate('/contact')}>Contact Us</button>
+          <button onClick={() => navigate("/mainpage")}>Home</button>
+          <button onClick={() => navigate("/aboutus")}>About Us</button>
+          <button onClick={() => navigate("/contact")}>Contact Us</button>
         </div>
       </div>
 
@@ -96,33 +105,23 @@ const ProfilePage = () => {
               <form onSubmit={handleSubmit(onSubmit)} className="edit-form">
                 <label>Full Name</label>
                 <input {...register("fullname")} />
-                <p style={{ color: "red", fontSize: "0.8rem" }}>
-                  {errors.fullname?.message}
-                </p>
+                <p className="error">{errors.fullname?.message}</p>
 
                 <label>Date of Birth</label>
                 <input type="date" {...register("DOB")} />
-                <p style={{ color: "red", fontSize: "0.8rem" }}>
-                  {errors.DOB?.message}
-                </p>
+                <p className="error">{errors.DOB?.message}</p>
 
                 <label>Email</label>
                 <input {...register("email")} />
-                <p style={{ color: "red", fontSize: "0.8rem" }}>
-                  {errors.email?.message}
-                </p>
+                <p className="error">{errors.email?.message}</p>
 
                 <label>Address</label>
                 <input {...register("address")} />
-                <p style={{ color: "red", fontSize: "0.8rem" }}>
-                  {errors.address?.message}
-                </p>
+                <p className="error">{errors.address?.message}</p>
 
                 <label>Contact</label>
                 <input {...register("contact")} />
-                <p style={{ color: "red", fontSize: "0.8rem" }}>
-                  {errors.contact?.message}
-                </p>
+                <p className="error">{errors.contact?.message}</p>
 
                 <button type="submit" className="save-btn">Save Changes</button>
                 <button type="button" className="cancel-btn" onClick={handleCancel}>Cancel</button>
@@ -139,25 +138,7 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      <div className="user-actions">
-        <div className="action-card" onClick={() => handleNavigation('/orders')}>
-          <img src="src/pictures/orders-icon.png" alt="Orders" />
-          <span>My Orders</span>
-        </div>
-        <div className="action-card" onClick={() => handleNavigation('/favorites')}>
-          <img src="src/pictures/favorites-icon.png" alt="Favorites" />
-          <span>Favorites</span>
-        </div>
-        <div className="action-card" onClick={() => handleNavigation('/tables')}>
-          <img src="src/pictures/table-icon.png" alt="Table" />
-          <span>My Table</span>
-        </div>
-        <div className="action-card logout" onClick={handleLogoutClick}>
-          <img src="src/pictures/logout-icon.png" alt="Logout" />
-          <span>Logout</span>
-        </div>
-      </div>
-
+      {/* Logout Modal */}
       {showModal && (
         <div className="modal">
           <div className="modal-content">
