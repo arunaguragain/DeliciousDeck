@@ -141,7 +141,7 @@ const ProfilePage = () => {
 
       <div className="user-actions">
         <div className="action-card" onClick={() => handleNavigation('/orders')}>
-          <img src="orders-icon.png" alt="Orders" />
+          <img src="src/pictures/orders-icon.png" alt="Orders" />
           <span>My Orders</span>
         </div>
         <div className="action-card" onClick={() => handleNavigation('/favorites')}>
@@ -149,7 +149,7 @@ const ProfilePage = () => {
           <span>Favorites</span>
         </div>
         <div className="action-card" onClick={() => handleNavigation('/tables')}>
-          <img src="table-icon.png" alt="Table" />
+          <img src="src/pictures/table-icon.png" alt="Table" />
           <span>My Table</span>
         </div>
         <div className="action-card logout" onClick={handleLogoutClick}>
