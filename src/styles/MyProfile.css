@@ -179,21 +179,6 @@
   #profile-upload {
     display: none;
   }
-
-.cancel-btn {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-  }
-  
-  .cancel-btn:hover {
-    background-color: #d32f2f;
-  }
   
 .modal {
     position: fixed;
@@ -225,21 +210,26 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    border-radius: 5px;
   }
   
   .confirm-btn {
     background-color: green;
-    color: white;
     border: none;
   }
   
   .cancel-btn {
-    background-color: red;
-    color: white;
+    background-color: #d32f2f;
     border: none;
   }
-  
-  
+
+  .cancel-btn:hover {
+    background-color: #9b5d5d;
+  }
+
+  .confirm-btn:hover {
+    background-color: rgb(109, 181, 109);
+  }
   
   @media (max-width: 768px) {
     .user-actions {
