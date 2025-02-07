@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [editing, setEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false); // Sidebar toggle state
+  const [sidebarOpen, setSidebarOpen] = useState(false); 
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
@@ -65,15 +65,24 @@ const ProfilePage = () => {
 
   return (
     <div className="container">
- 
+      {/* Sidebar */}
       <div className={`sidebar ${sidebarOpen ? "active" : ""}`}>
         <button className="close-btn" onClick={toggleSidebar}>✖</button>
-        <button onClick={() => navigate('/orders')}>📦 My Orders</button>
-        <button onClick={() => navigate('/favorites')}>❤️ Favorites</button>
-        <button onClick={() => navigate('/tables')}>🍽️ My Table</button>
-        <button className="logout-btn" onClick={handleLogoutClick}>🚪 Logout</button>
+        <button onClick={() => navigate('/orders')}>
+          <img src="src/pictures/orders-icon.png" className="icon" alt="Orders" /> My Orders
+        </button>
+        <button onClick={() => navigate('/favorites')}>
+          <img src="src/pictures/favorites-icon.png" className="icon" alt="Favorites" /> Favorites
+        </button>
+        <button onClick={() => navigate('/tables')}>
+          <img src="src/pictures/table-icon.png" className="icon" alt="Table" /> My Table
+        </button>
+        <button className="logout-btn" onClick={handleLogoutClick}>
+          <img src="src/pictures/logout-icon.png" className="icon" alt="Logout" /> Logout
+        </button>
       </div>
 
+      {/* Navbar */}
       <div className="navbar">
         <div className="logo" onClick={toggleSidebar}></div>
         <div className="nav-links">
@@ -83,6 +92,7 @@ const ProfilePage = () => {
         </div>
       </div>
 
+      {/* Profile Section */}
       <div className="profile">
         <div className="profile-card">
           <div className="profile-info">
@@ -103,28 +113,40 @@ const ProfilePage = () => {
 
             {editing ? (
               <form onSubmit={handleSubmit(onSubmit)} className="edit-form">
-                <label>Full Name</label>
-                <input {...register("fullname")} />
+                <div className="form-group">
+                  <label>Name</label>
+                  <input {...register("fullname")} />
+                </div>
                 <p className="error">{errors.fullname?.message}</p>
 
-                <label>Date of Birth</label>
-                <input type="date" {...register("DOB")} />
+                <div className="form-group">
+                  <label>DOB</label>
+                  <input type="date" {...register("DOB")} />
+                </div>
                 <p className="error">{errors.DOB?.message}</p>
 
-                <label>Email</label>
-                <input {...register("email")} />
+                <div className="form-group">
+                  <label>Email</label>
+                  <input {...register("email")} />
+                </div>
                 <p className="error">{errors.email?.message}</p>
 
-                <label>Address</label>
-                <input {...register("address")} />
+                <div className="form-group">
+                  <label>Address</label>
+                  <input {...register("address")} />
+                </div>
                 <p className="error">{errors.address?.message}</p>
 
-                <label>Contact</label>
-                <input {...register("contact")} />
+                <div className="form-group">
+                  <label>Contact</label>
+                  <input {...register("contact")} />
+                </div>
                 <p className="error">{errors.contact?.message}</p>
 
-                <button type="submit" className="save-btn">Save Changes</button>
-                <button type="button" className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                <div className="form-buttons">
+                  <button type="submit" className="save-btn">Save Changes</button>
+                  <button type="button" className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                </div>
               </form>
             ) : (
               <div className="user-details">

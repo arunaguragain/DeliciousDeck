@@ -6,14 +6,40 @@ import { useNavigate } from "react-router-dom";
 
 import "../styles/Login.css";
 
+const LoginForm = () => {
+const navigate = useNavigate();
+const onSubmit = (data) => {
+  console.log("Logging in with:", data);
+
+  axios
+    .post(`${API.BASE_URL}/api/auth/login`, data, {
+      headers:{
+        "Content-Type:": "application/json",
+      },
+ })
+ .then((response) => {
+  console.log("Login Response:", response.data.data.access_token);
+
+  if(response.data&& response.data.data.access_token){
+    console.log("Access Token:", response.data.data.access_token);
+    localStorage.setItem("token", response.data.data.access_token);
+    navigate("/mainpage");
+  }else{
+    alert("Login failed! Check credentials");
+  }
+ })
+ .catch((error) => {
+  console.error("Erroe logging in:", error);
+  alert("Error logging in. Please try again");
+ });
+
+ reset();
+}
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid email format").required("Email is required"),
   password: yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
 });
-
-const LoginForm = () => {
-  const navigate = useNavigate();
-
+  
   const {
     register,
     handleSubmit,
@@ -22,17 +48,17 @@ const LoginForm = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = (data) => {
-    const storedEmail = localStorage.getItem("storedEmail");
-    const storedPassword = localStorage.getItem("storedPassword");
+  // const onSubmit = (data) => {
+    // const storedEmail = localStorage.getItem("storedEmail");
+    // const storedPassword = localStorage.getItem("storedPassword");
 
-    if (data.email === storedEmail && data.password === storedPassword) {
-      alert("Login successful! Redirecting to dashboard...");
-      navigate("/dashboard");
-    } else {
-      alert("Invalid email or password. Please try again.");
-    }
-  };
+    // if (data.email === storedEmail && data.password === storedPassword) {
+    //   alert("Login successful! Redirecting to dashboard...");
+    //   navigate("/mainpage");
+    // } else {
+    //   alert("Invalid email or password. Please try again.");
+    // }
+  // };
 
   return (
     <div className="login-main">
