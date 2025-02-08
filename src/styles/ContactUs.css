@@ -1,0 +1,161 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .navbar {
+    width: 100%;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: rgb(240, 251, 240);
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(36, 31, 31, 0.1);
+  }
+  
+  .logo {
+    cursor: pointer;
+    background-image: url("../pictures/DELICIOUS.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 110px;
+  }
+  
+  .nav-links button {
+    background-color: transparent;
+    border: none;
+    color: rgb(73, 37, 37);
+    font-size: 16px;
+    margin: 0 15px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links button:hover {
+    color: #af3f3f;
+  }
+  
+  #contact-us-section {
+    padding: 40px;
+    text-align: center;
+    height: 100vh;
+    background-color: beige;
+  }
+  
+  .contact-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  #contact-us-section h2 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  #contact-us-section p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 15px;
+  }
+  
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .contact-location,
+  .contact-details {
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+  }
+  
+  .contact-location h3,
+  .contact-details h3 {
+    font-size: 28px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+  }
+  
+  .contact-location p,
+  .contact-details p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 15px;
+  }
+  
+  .contact-location a,
+  .contact-details a {
+    color: #5cb85c;
+    text-decoration: none;
+  }
+  
+  .contact-location a:hover,
+  .contact-details a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      height: auto;
+      padding: 20px;
+    }
+  
+    .logo {
+      width: 90px;
+      margin-bottom: 10px;
+    }
+  
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #contact-us-section {
+      height: auto;
+      padding: 20px;
+    }
+  
+    .contact-info {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .contact-location,
+    .contact-details {
+      min-width: auto;
+      text-align: center;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .navbar {
+      padding: 15px;
+    }
+  
+    .logo {
+      width: 80px;
+    }
+
+    .contact-container {
+      padding: 10px;
+    }
+  
+  }
+  

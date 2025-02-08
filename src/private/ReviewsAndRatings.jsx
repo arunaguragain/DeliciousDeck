@@ -88,7 +88,7 @@ const ReviewSection = () => {
         <div className="nav-links">
           <button onClick={() => navigate("/mainpage")}>Home</button>
           <button onClick={() => navigate("/aboutus")}>About Us</button>
-          <button onClick={() => navigate("/contact")}>Contact Us</button>
+          <button onClick={() => navigate("/contactus")}>Contact Us</button>
         </div>
       </div>
       <div className="contents">
