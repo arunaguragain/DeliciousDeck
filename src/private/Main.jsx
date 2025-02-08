@@ -27,7 +27,7 @@ const MainPage = () => {
           <li><button onClick={() => navigate('/book-table')}>Book A Table</button></li>
           <li><button onClick={() => navigate('/profilepage')}>My Profile</button></li>
           <li><button onClick={() => navigate('/mycart')}>My Cart</button></li>
-          <li><button onClick={() => navigate('/reviews')}>Reviews</button></li>
+          <li><button onClick={() => navigate('/reviewsection')}>Reviews</button></li>
           <li><button onClick={toggleSidebar}>Close</button></li>
         </ul>
       </div>

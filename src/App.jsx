@@ -9,6 +9,7 @@ function App() {
   const MainPage = React.lazy(() => import('./private/Main'));
   const AboutUs = React.lazy(() => import('./private/AboutUs'));
   const ProfilePage = React.lazy(() => import('./private/MyProfile'));
+  const ReviewSection = React.lazy(() => import('./private/ReviewsAndRatings'))
  
   return (
     <Router>
@@ -21,6 +22,7 @@ function App() {
          <Route path='/mainpage' element={<MainPage/>}></Route>
          <Route path='/aboutus' element={<AboutUs/>}></Route>
          <Route path='/profilepage' element={<ProfilePage/>}></Route>
+         <Route path='/reviewsection' element={<ReviewSection/>}></Route>
         </Routes>
       </Suspense>
     </Router>
