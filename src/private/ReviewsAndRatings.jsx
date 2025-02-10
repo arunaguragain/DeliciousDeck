@@ -91,7 +91,7 @@ const ReviewSection = () => {
           <button onClick={() => navigate("/contactus")}>Contact Us</button>
         </div>
       </div>
-      <div className="contents">
+      <div className="review_contents">
         <h2>Customer Reviews</h2>
         <div className="reviews-list">
           {reviews.length > 0 ? (
