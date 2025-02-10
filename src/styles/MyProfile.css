@@ -227,8 +227,9 @@ body {
   text-align: center;
 }
 
-.modal-content h2 {
+.modal-content h5 {
   margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .save-btn,

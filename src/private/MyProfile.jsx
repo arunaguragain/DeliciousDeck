@@ -164,7 +164,7 @@ const ProfilePage = () => {
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h2>Are you sure you want to log out?</h2>
+            <h5>Are you sure you want to log out?</h5>
             <button onClick={handleLogoutConfirm} className="confirm-btn">Confirm</button>
             <button onClick={handleLogoutCancel} className="cancel-btn">Cancel</button>
           </div>
