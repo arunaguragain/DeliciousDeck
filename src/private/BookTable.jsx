@@ -14,8 +14,16 @@ const BookingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, email, phone, date, time, guests });
-    alert("Booking confirmed! We will reach out soon.");
+    const newBooking = { name, email, phone, date, time, guests };
+    
+    const existingBookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    existingBookings.push(newBooking);
+    localStorage.setItem("bookings", JSON.stringify(existingBookings));
+  
+    alert("Booking confirmed!");
+
+    // Redirect to 'My Table' page after confirmation
+    navigate("/mytable"); // Add the page URL you want to redirect to
   };
 
   return (
@@ -30,80 +38,80 @@ const BookingForm = () => {
       </div>
 
       <div className="main">
-      <div className="booking-form">
-      <h2>Book a Table at Delicious Deck</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Your Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
+        <div className="booking-form">
+          <h2>Book a Table at Delicious Deck</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name">Your Name:</label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="email">Email Address:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="email">Email Address:</label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="phone">Phone Number:</label>
-          <input
-            type="tel"
-            id="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="phone">Phone Number:</label>
+              <input
+                type="tel"
+                id="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="date">Reservation Date:</label>
-          <input
-            type="date"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="date">Reservation Date:</label>
+              <input
+                type="date"
+                id="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                required
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="time">Reservation Time:</label>
-          <input
-            type="time"
-            id="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="time">Reservation Time:</label>
+              <input
+                type="time"
+                id="time"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                required
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="guests">Number of Guests:</label>
-          <input
-            type="number"
-            id="guests"
-            min="1"
-            max="10"
-            value={guests}
-            onChange={(e) => setGuests(Number(e.target.value))}
-            required
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="guests">Number of Guests:</label>
+              <input
+                type="number"
+                id="guests"
+                min="1"
+                max="10"
+                value={guests}
+                onChange={(e) => setGuests(Number(e.target.value))}
+                required
+              />
+            </div>
 
-        <button type="submit" className="bookingbtn">Confirm Booking</button>
-      </form>
-      </div>
+            <button type="submit" className="bookingbtn">Confirm Booking</button>
+          </form>
+        </div>
       </div>
     </div>
   );

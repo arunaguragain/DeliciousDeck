@@ -1,7 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-
 function App() {
   const Dashboard = React.lazy(() => import("./public/Dashboard"));
   const Login = React.lazy(() => import("./public/Login"));
@@ -12,7 +11,8 @@ function App() {
   const ReviewSection = React.lazy(() => import('./private/ReviewsAndRatings'));
   const ContactUs = React.lazy(() => import('./private/ContactUs.jsx'));
   const Menu = React.lazy(() => import('./private/Menu.jsx'));
-  const BookingForm = React.lazy(() => import('./private/BookTable.jsx'))
+  const BookingForm = React.lazy(() => import('./private/BookTable.jsx'));
+  const MyTable = React.lazy(() => import('./private/MyTable.jsx'));
  
   return (
     <Router>
@@ -29,6 +29,7 @@ function App() {
          <Route path='/contactus' element={<ContactUs/>}></Route>
          <Route path='/menu' element={<Menu/>}></Route>
          <Route path='/bookingform' element={<BookingForm/>}></Route>
+         <Route path='/mytable' element={<MyTable/>}></Route>
         </Routes>
       </Suspense>
     </Router>

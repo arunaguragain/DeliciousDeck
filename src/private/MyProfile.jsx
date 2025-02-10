@@ -74,7 +74,7 @@ const ProfilePage = () => {
         <button onClick={() => navigate('/favorites')}>
           <img src="src/pictures/favorites-icon.png" className="icon" alt="Favorites" /> Favorites
         </button>
-        <button onClick={() => navigate('/tables')}>
+        <button onClick={() => navigate('/mytable')}>
           <img src="src/pictures/table-icon.png" className="icon" alt="Table" /> My Table
         </button>
         <button className="logout-btn" onClick={handleLogoutClick}>
