@@ -1,0 +1,88 @@
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.menu-item {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-4px);
+}
+
+.image-wrapper {
+  height: 220px;
+  overflow: hidden;
+  border-bottom: 2px solid #f2f2f2;
+}
+
+.food-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover .food-image {
+  transform: scale(1.05);
+}
+
+.item-info {
+  padding: 15px;
+}
+
+.item-info h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.item-info p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff7043;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.actions button {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ff7043;
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.actions button:hover {
+  background-color: #e64a19;
+}
+
+.favorite {
+  background-color: #777;
+}
+
+.favorite:hover {
+  background-color: #555;
+}

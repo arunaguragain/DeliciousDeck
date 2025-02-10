@@ -11,6 +11,8 @@ function App() {
   const ProfilePage = React.lazy(() => import('./private/MyProfile'));
   const ReviewSection = React.lazy(() => import('./private/ReviewsAndRatings'));
   const ContactUs = React.lazy(() => import('./private/ContactUs.jsx'));
+  const Menu = React.lazy(() => import('./private/Menu.jsx'));
+  const BookingForm = React.lazy(() => import('./private/BookTable.jsx'))
  
   return (
     <Router>
@@ -25,6 +27,8 @@ function App() {
          <Route path='/profilepage' element={<ProfilePage/>}></Route>
          <Route path='/reviewsection' element={<ReviewSection/>}></Route>
          <Route path='/contactus' element={<ContactUs/>}></Route>
+         <Route path='/menu' element={<Menu/>}></Route>
+         <Route path='/bookingform' element={<BookingForm/>}></Route>
         </Routes>
       </Suspense>
     </Router>
