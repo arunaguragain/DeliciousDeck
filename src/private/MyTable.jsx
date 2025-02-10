@@ -31,6 +31,8 @@ const MyTable = () => {
         </div>
       </div>
 
+      <div className="mytablecontents">
+
       {/* Page Title */}
       <h2>My Booked Tables</h2>
 
@@ -56,13 +58,14 @@ const MyTable = () => {
                 <td>{booking.time}</td>
                 <td>{booking.guests}</td>
                 <td>
-                  <button className="delete-btn" onClick={() => handleDelete(index)}>Cancel</button>
+                  <button className="delete-btn" onClick={() => handleDelete(index)}>Cancel Booking</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
+      </div>
     </div>
   );
 };

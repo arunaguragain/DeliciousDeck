@@ -39,7 +39,7 @@ const BookingForm = () => {
 
       <div className="main">
         <div className="booking-form">
-          <h2>Book a Table at Delicious Deck</h2>
+          <h4>Book a Table at Delicious Deck</h4>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="name">Your Name:</label>
