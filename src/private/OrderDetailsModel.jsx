@@ -1,34 +1,22 @@
-import React from "react";
-import "../styles/OrderDetailsModal.css";
+import React from 'react';
+import '../styles/OrderDetailsModal.css'; // Include your CSS
 
 const OrderDetailsModal = ({ orderDetails, closeModal }) => {
-  if (!orderDetails) return null;
-
-  // Close modal when clicking outside the content
-  const handleOverlayClick = (e) => {
-    if (e.target.classList.contains("modal-overlay")) {
-      closeModal();
-    }
-  };
-
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
+    <div className="modal-overlay">
       <div className="modal-content">
-        <button className="close-btn" onClick={closeModal}>X</button>
-        <h2>Order Details</h2>
-        <div className="order-summary">
-          <p><strong>Order ID:</strong> {orderDetails.id}</p>
-          <p><strong>Date:</strong> {new Date(orderDetails.date).toLocaleDateString()}</p>
-          <p><strong>Total:</strong> Rs. {orderDetails.total}</p>
-        </div>
+        <button className="close-btn" onClick={closeModal}>&times;</button>
 
-        <div className="order-items">
-          <h3>Items:</h3>
-          <ul>
+        <h3>Order ID: {orderDetails.id}</h3>
+        <p>Date: {new Date(orderDetails.date).toLocaleDateString()}</p>
+        <p>Total: Rs. {orderDetails.total}</p>
+        <p><strong>Status:</strong> {orderDetails.status}</p> {/* Display status */}
+
+        <div className="order-summary">
+          <h4>Order Summary:</h4>
+          <ul className="order-items">
             {orderDetails.items.map((item, index) => (
-              <li key={index}>
-                {item.name} - Rs. {item.price} x {item.quantity}
-              </li>
+              <li key={index}>{item.name} x{item.quantity} - Rs. {item.quantity * item.price}</li>
             ))}
           </ul>
         </div>

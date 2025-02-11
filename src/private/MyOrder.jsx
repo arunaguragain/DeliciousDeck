@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/MyOrders.css";
-import OrderDetailsModal from "../private/OrderDetailsModel.jsx"; // Import the modal
+import OrderDetailsModal from "../private/OrderDetailsModel";
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -13,18 +13,18 @@ const MyOrders = () => {
   // Fetch orders from localStorage
   useEffect(() => {
     const storedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-    console.log(storedOrders); // Check if orders are loaded properly
+    console.log(storedOrders);
     setOrders(storedOrders);
   }, []);
 
   const openModal = (order) => {
     setSelectedOrder(order);
-    setIsModalOpen(true); // Open the modal when clicking 'View Details'
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Close the modal
-    setSelectedOrder(null); // Reset the selected order
+    setIsModalOpen(false);
+    setSelectedOrder(null);
   };
 
   return (
@@ -51,6 +51,7 @@ const MyOrders = () => {
                 <th>Order ID</th>
                 <th>Date</th>
                 <th>Total</th>
+                <th>Status</th>
                 <th>Details</th>
               </tr>
             </thead>
@@ -60,6 +61,14 @@ const MyOrders = () => {
                   <td>{order.id}</td>
                   <td>{new Date(order.date).toLocaleDateString()}</td>
                   <td>Rs. {order.total}</td>
+                  <td>
+                    {/* Check if the order is Out for Delivery */}
+                    {order.status === "Out for Delivery" ? (
+                      "Your order will be delivered soon"
+                    ) : (
+                      order.status
+                    )}
+                  </td>
                   <td>
                     <button onClick={() => openModal(order)}>View Details</button>
                   </td>
