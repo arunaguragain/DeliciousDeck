@@ -1,88 +1,183 @@
-.menu {
+/* Fusion Menu.css */
+
+/* Background and Main Page Style */
+body {
+  background: url('parchment-texture.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Georgia', serif;
+  color: #3b2f1f;
+}
+.menu-page{
+  display: flex;
+  flex-direction: column;
+}
+.navbar {
+  width: 100%;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  background-color: rgb(240, 251, 240);
+  justify-content: space-between;
+  box-shadow: 0 4px 10px rgba(36, 31, 31, 0.1);
+  position: relative;
+  padding: 0 20px;
+}
+
+.logo {
+  cursor: pointer;
+  background-image: url("../pictures/DELICIOUS.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100px;
+  width: 110px;
+}
+
+.nav-links button {
+  background-color: transparent;
+  border: none;
+  color: rgb(73, 37, 37);
+  font-size: 16px;
+  margin: 0 15px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.nav-links button:hover {
+  color: #af3f3f;
+}
+/* Menu Section Styling */
+h1 {
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 30px;
+  font-family: 'Cursive', sans-serif;
+  color: #3b2f1f;
+}
+
+.category {
+  margin-bottom: 50px;
+}
+
+.category h2 {
+  font-size: 2em;
+  font-family: 'Courier New', Courier, monospace;
+  border-bottom: 2px dashed #3b2f1f;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+.menu-items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
 }
 
 .menu-item {
-  background-color: #fff;
-  border-radius: 10px;
+  background: #fff9e6;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transform: rotate(0deg);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
 }
 
 .menu-item:hover {
-  transform: translateY(-4px);
+  transform: rotate(-2deg);
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.25);
 }
 
-.image-wrapper {
-  height: 220px;
-  overflow: hidden;
-  border-bottom: 2px solid #f2f2f2;
+.menu-item h3 {
+  font-size: 1.8em;
+  font-family: 'Courier New', Courier, monospace;
+  color: #3b2f1f;
+  margin-bottom: 15px;
 }
 
-.food-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.menu-item:hover .food-image {
-  transform: scale(1.05);
-}
-
-.item-info {
-  padding: 15px;
-}
-
-.item-info h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.item-info p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
+.description {
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 15px;
 }
 
 .price {
-  font-size: 16px;
-  font-weight: 700;
-  color: #ff7043;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.actions button {
-  width: 48%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #ff7043;
-  color: white;
+  font-size: 1.4em;
   font-weight: bold;
-  transition: background-color 0.3s;
+  color: #FF8C00;
+  margin-bottom: 20px;
 }
 
-.actions button:hover {
-  background-color: #e64a19;
+.add-to-cart , .add-to-favorites {
+  background-color: #3b2f1f;
+  color: #fff;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-.favorite {
-  background-color: #777;
+.add-to-cart:hover , .add-to-favorites:hover {
+  background-color: #938575;
 }
 
-.favorite:hover {
-  background-color: #555;
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .menu-items {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  .category h2 {
+    font-size: 1.5em;
+  }
+}
+
+.menu-item-card {
+  width: 300px; /* Width for rectangular cards */
+  height: 200px; /* Height for rectangular cards */
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+  margin: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card-content {
+  padding: 15px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.card-content h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-content .description {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.card-content .price {
+  font-size: 16px;
+  margin-bottom: 15px;
 }
