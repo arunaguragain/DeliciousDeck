@@ -13,6 +13,7 @@ function App() {
   const Menu = React.lazy(() => import('./private/Menu.jsx'));
   const BookingForm = React.lazy(() => import('./private/BookTable.jsx'));
   const MyTable = React.lazy(() => import('./private/MyTable.jsx'));
+  const MyCart = React.lazy(() => import('./private/MyCart.jsx'));
  
   return (
     <Router>
@@ -30,6 +31,7 @@ function App() {
          <Route path='/menu' element={<Menu/>}></Route>
          <Route path='/bookingform' element={<BookingForm/>}></Route>
          <Route path='/mytable' element={<MyTable/>}></Route>
+         <Route path='/mycart' element={<MyCart/>}></Route>
         </Routes>
       </Suspense>
     </Router>
