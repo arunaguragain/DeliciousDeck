@@ -33,9 +33,8 @@ const MyCart = () => {
   };
 
   const calculateSubtotal = (price, quantity) => {
-    // Ensure price and quantity are valid numbers
     if (!price || !quantity) {
-      return 0; // Return 0 if price or quantity is missing
+      return 0; 
     }
     return price * quantity;
   };
@@ -48,9 +47,29 @@ const MyCart = () => {
     const deliveryCharge = 100;  // Example delivery charge
     return subtotal + deliveryCharge;
   };
-  
 
-  
+  // Handle the place order action
+  const handlePlaceOrder = () => {
+    const order = {
+      id: Date.now(),
+      date: new Date(),
+      total: calculateTotal(),
+      items: cartItems,
+    };
+
+    // Fetch existing orders from localStorage and add the new order
+    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    existingOrders.push(order);
+    localStorage.setItem("orders", JSON.stringify(existingOrders));
+
+    // Clear the cart after placing the order
+    localStorage.removeItem("cart");
+
+    // Redirect to My Orders page
+    alert("Your order has been placed successfully!");
+    navigate("/myorders");
+  };
+
   return (
     <div className="my-cart">
       {/* Navbar */}
@@ -112,14 +131,13 @@ const MyCart = () => {
               </tbody>
             </table>
 
-            {/* Subtotal and Total */}
             <div className="cart-summary">
-            <p>Subtotal: Rs. {calculateTotal() - 100}</p>  
-            <p>Delivery Charge: Rs. 100</p>
-            <p>Total: Rs. {calculateTotal()}</p>
+              <p>Subtotal: Rs. {calculateTotal() - 100}</p>
+              <p>Delivery Charge: Rs. 100</p>
+              <p>Total: Rs. {calculateTotal()}</p>
             </div>
 
-            <button className="place-order-btn" onClick={() => navigate("/checkout")}>
+            <button className="place-order-btn" onClick={handlePlaceOrder}>
               Place Order
             </button>
           </>

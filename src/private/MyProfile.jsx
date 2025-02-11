@@ -68,7 +68,7 @@ const ProfilePage = () => {
       {/* Sidebar */}
       <div className={`sidebar ${sidebarOpen ? "active" : ""}`}>
         <button className="close-btn" onClick={toggleSidebar}>✖</button>
-        <button onClick={() => navigate('/orders')}>
+        <button onClick={() => navigate('/myorders')}>
           <img src="src/pictures/orders-icon.png" className="icon" alt="Orders" /> My Orders
         </button>
         {/* <button onClick={() => navigate('/favorites')}>

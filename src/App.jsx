@@ -14,6 +14,8 @@ function App() {
   const BookingForm = React.lazy(() => import('./private/BookTable.jsx'));
   const MyTable = React.lazy(() => import('./private/MyTable.jsx'));
   const MyCart = React.lazy(() => import('./private/MyCart.jsx'));
+  const MyOrders = React.lazy(() => import('./private/MyOrder.jsx'));
+  const OrderDetailsModal = React.lazy(() => import('./private/OrderDetailsModel.jsx'));
  
   return (
     <Router>
@@ -32,6 +34,8 @@ function App() {
          <Route path='/bookingform' element={<BookingForm/>}></Route>
          <Route path='/mytable' element={<MyTable/>}></Route>
          <Route path='/mycart' element={<MyCart/>}></Route>
+         <Route path='/myorders' element={<MyOrders/>}></Route>
+         <Route path='/orderdetailsmodel' element={<OrderDetailsModal/>}></Route>
         </Routes>
       </Suspense>
     </Router>
