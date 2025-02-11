@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Card, Button, Container, Row, Col, Form } from "react-bootstrap";
 import "../styles/Menu.css";
 
@@ -52,12 +53,15 @@ const menuItems = {
   ],
 };
 
+
 const Menu = () => {
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [sortOption, setSortOption] = useState("default");
   const [cart, setCart] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const navigate = useNavigate();  
 
   // Function to get filtered items based on category and search term
   const getFilteredItems = () => {
@@ -77,9 +81,41 @@ const Menu = () => {
     return 0;
   });
 
-  const addToCart = (item) => {
-    setCart([...cart, item]);
+  // const addToCart = (item) => {
+  //   setCart([...cart, item]);
+  // };
+
+  const handleAddToCart = (item) => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+    // Check if the item already exists in the cart
+    const existingItem = cart.find(cartItem => cartItem.name === item.name);
+  
+    if (existingItem) {
+      // If item exists, increase the quantity
+      existingItem.quantity += 1;
+    } else {
+      // If item doesn't exist, add it with an initial quantity of 1
+      const itemWithQuantity = { ...item, quantity: 1 };
+      cart.push(itemWithQuantity);
+    }
+  
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Item added to cart!");
   };
+
+  const renderCartItems = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
+    return cart.map((item, index) => (
+      <div key={index}>
+        <h5>{item.name}</h5>
+        <p>Price: Rs. {item.price}</p>
+        <p>Quantity: {item.quantity}</p>
+      </div>
+    ));
+  };
+  
 
   const addToFavorites = (item) => {
     if (!favorites.includes(item)) {
@@ -93,6 +129,7 @@ const Menu = () => {
       <div className="navbar">
         <div className="logo"></div>
         <div className="nav-links">
+         <button onClick={() => navigate("/mycart")}>My Cart</button>
           <button onClick={() => navigate("/mainpage")}>Home</button>
           <button onClick={() => navigate("/aboutus")}>About Us</button>
           <button onClick={() => navigate("/contactus")}>Contact Us</button>
@@ -123,7 +160,6 @@ const Menu = () => {
         </Form.Select>
       </div>
 
-      {/* Display Menu Items */}
       <Row>
         {sortedItems.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase())).map((item, index) => (
           <Col md={4} key={index} className="mb-4">
@@ -133,8 +169,9 @@ const Menu = () => {
                 <Card.Text>{item.description}</Card.Text>
                 <Card.Text>Price: Rs. {item.price}</Card.Text>
                 <div className="d-flex justify-content-between">
-                  <Button variant="primary" onClick={() => addToCart(item)}>Add to Cart</Button>
-                  <Button variant="secondary" onClick={() => addToFavorites(item)}>Add to Favorites</Button>
+                  {/* <Button variant="primary" onClick={() => addToCart(item)}>Add to Cart</Button> */}
+                  <Button variant="primary" onClick={() => handleAddToCart(item)}>Add to Cart</Button>
+                  {/* <Button variant="secondary" onClick={() => addToFavorites(item)}>Add to Favorites</Button> */}
                 </div>
               </Card.Body>
             </Card>

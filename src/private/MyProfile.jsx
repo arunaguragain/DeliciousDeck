@@ -71,9 +71,9 @@ const ProfilePage = () => {
         <button onClick={() => navigate('/orders')}>
           <img src="src/pictures/orders-icon.png" className="icon" alt="Orders" /> My Orders
         </button>
-        <button onClick={() => navigate('/favorites')}>
+        {/* <button onClick={() => navigate('/favorites')}>
           <img src="src/pictures/favorites-icon.png" className="icon" alt="Favorites" /> Favorites
-        </button>
+        </button> */}
         <button onClick={() => navigate('/mytable')}>
           <img src="src/pictures/table-icon.png" className="icon" alt="Table" /> My Table
         </button>
