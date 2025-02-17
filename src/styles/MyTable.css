@@ -73,15 +73,24 @@
     color: black;
   }
   
-  .delete-btn {
+  .delete-btn,.cancel-btn {
     background-color: maroon;
     color: white;
     padding: 5px 10px;
     border: none;
     cursor: pointer;
   }
+
+  .edit-btn, .save-btn {
+    background-color: maroon;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    margin-right: 20px;
+    cursor: pointer;
+  }
   
-  .delete-btn:hover {
+  .delete-btn:hover, .cancel-btn:hover, .save-btn:hover, .edit-btn:hover {
     background-color: darkred;
   }
 

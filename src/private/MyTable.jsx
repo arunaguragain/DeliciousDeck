@@ -4,7 +4,15 @@ import "../styles/MyTable.css";
 
 const MyTable = () => {
   const [bookings, setBookings] = useState([]);
+  const [editingBookingId, setEditingBookingId] = useState(null); // Track which booking is being edited
+  const [updatedBooking, setUpdatedBooking] = useState({}); // Track updated booking data
   const navigate = useNavigate();
+
+  // Function to format date to a more readable format
+  const formatDate = (date) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(date).toLocaleDateString(undefined, options); // Formats as "Month Day, Year"
+  };
 
   // Fetch bookings from the backend API
   useEffect(() => {
@@ -27,6 +35,7 @@ const MyTable = () => {
 
         if (response.ok) {
           const data = await response.json();
+          console.log("Fetched bookings:", data); // Log the bookings to inspect their structure
           setBookings(data);  // Set the bookings fetched from the server
         } else {
           alert("Failed to fetch bookings. Please try again later.");
@@ -41,7 +50,9 @@ const MyTable = () => {
   }, [navigate]);
 
   // Handle deleting a booking
-  const handleDelete = async (index, bookingId) => {
+  const handleDelete = async (index, reservationId) => {
+    console.log("Reservation ID:", reservationId);  // Log the ID to ensure it's correct
+    
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -51,8 +62,8 @@ const MyTable = () => {
     }
 
     try {
-      // Send delete request to the backend
-      const response = await fetch(`http://localhost:5001/reservations/${bookingId}`, {
+      // Send delete request to the backend with reservationId
+      const response = await fetch(`http://localhost:5001/reservations/${reservationId}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -60,7 +71,8 @@ const MyTable = () => {
       });
 
       if (response.ok) {
-        const updatedBookings = bookings.filter((_, i) => i !== index);
+        // Remove the deleted booking from the state
+        const updatedBookings = bookings.filter(booking => booking.reservationId !== reservationId);  
         setBookings(updatedBookings);
         alert("Booking canceled successfully");
       } else {
@@ -71,6 +83,57 @@ const MyTable = () => {
       console.error("Error deleting booking:", err);
       alert("Something went wrong. Please try again.");
     }
+  };
+
+  // Handle editing a booking
+  const handleEdit = (booking) => {
+    setEditingBookingId(booking.reservationId); // Set the booking being edited
+    setUpdatedBooking({ ...booking }); // Pre-fill the form with the booking data
+  };
+
+  // Handle updating the booking
+  const handleUpdate = async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please log in to update the booking");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5001/reservations/${updatedBooking.reservationId}`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedBooking)
+      });
+
+      if (response.ok) {
+        const updatedBookings = bookings.map((booking) =>
+          booking.reservationId === updatedBooking.reservationId ? updatedBooking : booking
+        );
+        setBookings(updatedBookings);
+        setEditingBookingId(null); // Exit edit mode
+        alert("Booking updated successfully");
+      } else {
+        const data = await response.json();
+        alert(data.message || "Error updating booking");
+      }
+    } catch (err) {
+      console.error("Error updating booking:", err);
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
+  // Function to handle input changes for the edit form
+  const handleChange = (e) => {
+    setUpdatedBooking({
+      ...updatedBooking,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -100,23 +163,85 @@ const MyTable = () => {
                 <th>Date</th>
                 <th>Time</th>
                 <th>Guests</th>
+                <th>Table No</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {bookings.map((booking, index) => (
-                <tr key={booking._id}>  {/* Assuming _id is the unique identifier */}
-                  <td>{booking.name}</td>
-                  <td>{booking.date}</td>
-                  <td>{booking.time}</td>
-                  <td>{booking.guests}</td>
+              {bookings.map((booking) => (
+                <tr key={booking.reservationId}>
                   <td>
-                    <button 
-                      className="delete-btn" 
-                      onClick={() => handleDelete(index, booking._id)}  
-                    >
-                      Cancel Booking
-                    </button>
+                    {editingBookingId === booking.reservationId ? (
+                      <input
+                        type="text"
+                        name="name"
+                        value={updatedBooking.name}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      booking.name
+                    )}
+                  </td>
+                  <td>
+                    {editingBookingId === booking.reservationId ? (
+                      <input
+                        type="date"
+                        name="reservationDate"
+                        value={updatedBooking.reservationDate}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      formatDate(booking.reservationDate)
+                    )}
+                  </td>
+                  <td>
+                    {editingBookingId === booking.reservationId ? (
+                      <input
+                        type="time"
+                        name="reservationTime"
+                        value={updatedBooking.reservationTime}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      booking.reservationTime
+                    )}
+                  </td>
+                  <td>
+                    {editingBookingId === booking.reservationId ? (
+                      <input
+                        type="number"
+                        name="guestCount"
+                        value={updatedBooking.guestCount}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      booking.guestCount
+                    )}
+                  </td>
+                  <td>
+                    {editingBookingId === booking.reservationId ? (
+                      <input
+                        type="number"
+                        name="tableNo"
+                        value={updatedBooking.tableNo}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      booking.tableNo
+                    )}
+                  </td>
+                  <td>
+                    {editingBookingId === booking.reservationId ? (
+                      <>
+                        <button className="save-btn" onClick={handleUpdate}>Save</button>
+                        <button className="cancel-btn" onClick={() => setEditingBookingId(null)}>Cancel</button>
+                      </>
+                    ) : (
+                      <>
+                        <button className="edit-btn" onClick={() => handleEdit(booking)}>Edit</button>
+                        <button className="delete-btn" onClick={() => handleDelete(booking.index, booking.reservationId)}>Cancel Booking</button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}
