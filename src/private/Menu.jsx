@@ -169,9 +169,7 @@ const Menu = () => {
                 <Card.Text>{item.description}</Card.Text>
                 <Card.Text>Price: Rs. {item.price}</Card.Text>
                 <div className="d-flex justify-content-between">
-                  {/* <Button variant="primary" onClick={() => addToCart(item)}>Add to Cart</Button> */}
                   <Button variant="primary" onClick={() => handleAddToCart(item)}>Add to Cart</Button>
-                  {/* <Button variant="secondary" onClick={() => addToFavorites(item)}>Add to Favorites</Button> */}
                 </div>
               </Card.Body>
             </Card>

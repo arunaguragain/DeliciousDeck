@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
 import "../styles/BookTable.css";
 
 const BookingForm = () => {
@@ -9,21 +9,52 @@ const BookingForm = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [guests, setGuests] = useState(1);
+  const [tableno, setTableno] = useState("1");
 
-  const navigate = useNavigate(); // Define navigate function
+  const navigate = useNavigate(); 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newBooking = { name, email, phone, date, time, guests };
-    
-    const existingBookings = JSON.parse(localStorage.getItem("bookings")) || [];
-    existingBookings.push(newBooking);
-    localStorage.setItem("bookings", JSON.stringify(existingBookings));
-  
-    alert("Booking confirmed!");
+    const newBooking = { name, email, phone, reservationDate:date, reservationTime:time,  guestCount:guests, tableNo:tableno };
 
-    // Redirect to 'My Table' page after confirmation
-    navigate("/mytable"); // Add the page URL you want to redirect to
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("login expired");
+      navigate("/login")
+      return;
+    }
+
+    const userId = localStorage.getItem("userId");  
+
+    if (!userId) {
+      alert("No user found");
+      return;
+    }
+
+    const bookingPayload = { ...newBooking, UseruserId: userId };
+
+    try {
+      const response = await fetch("http://localhost:5001/reservations/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(bookingPayload),
+      });
+
+      if (response.ok) {
+        alert("Booking confirmed!");
+        navigate("/mytable");
+      } else {
+        const data = await response.json();
+        alert(data.message || "Error creating reservation");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -105,6 +136,19 @@ const BookingForm = () => {
                 max="10"
                 value={guests}
                 onChange={(e) => setGuests(Number(e.target.value))}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="tableno">Table No:</label>
+              <input
+                type="number"
+                id="tableno"
+                min="1"
+                max="20"
+                value={tableno}
+                onChange={(e) => setTableno(Number(e.target.value))}
                 required
               />
             </div>

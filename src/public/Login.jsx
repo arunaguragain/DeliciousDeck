@@ -27,11 +27,13 @@ const LoginForm = () => {
 
   const onSubmit = (data) => {
     console.log("Logging in with:", data);
+    console.log("API Base URL:", API.BASE_URL);
 
     axios
       .post(`${API.BASE_URL}/users/login`, data, {
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json"
         },
       })
       .then((response) => {
@@ -39,8 +41,18 @@ const LoginForm = () => {
 
         if (response.data && response.data.token) {
           console.log("Access Token:", response.data.token);
+
+          if (response.data.userId) {
+            console.log("User ID:", response.data.userId);
+            localStorage.setItem("userId", response.data.userId);
+          } else {
+            console.warn("Warning: userId is missing from the response!");
+          }
+
           localStorage.setItem("token", response.data.token);
+
           navigate("/mainpage");
+          window.location.reload();
         } else {
           alert("Login failed! Check credentials");
         }
@@ -108,7 +120,7 @@ const LoginForm = () => {
 
             <p>
               Don't have an account?{" "}
-              <button type="button" onClick={() => navigate("/signup")}>
+              <button type="button" className="btnsign" onClick={() => navigate("/signup")}>
                 Sign Up
               </button>
             </p>

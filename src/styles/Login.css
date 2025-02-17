@@ -114,7 +114,7 @@ input:focus {
     color: white;
 }
 
-button {
+.btnsign {
     background: none;
     border: none;
     color: #6c63ff;
@@ -125,8 +125,8 @@ button {
     padding: 0;
 }
 
-button:hover {
-    color: #5248c7;
+.btnsign:hover {
+    color: #020205;
 }
 
 p {
