@@ -3,6 +3,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import '../styles/Signup.css'
 
@@ -24,9 +25,35 @@ const SignupForm =() =>{
             resolver: yupResolver(schema),
         });
     
-        const onSubmit = (data) => {
-            console.log("form Data" , data)
+        // const onSubmit = (data) => {
+        //     console.log("form Data" , data)
+        // };
+
+        const onSubmit = async (data) => {
+            try {
+                // Prepare the data for registration
+                const registrationData = {
+                    fullName: data.fullname,
+                    dob: data.DOB,
+                    email: data.email,
+                    address: data.address,
+                    password: data.password,
+                };
+        
+                // Make the POST request to the backend
+                const response = await axios.post('http://localhost:5001/users/register', registrationData);
+        
+                // Handle success response (you can show a success message, for example)
+                console.log('Registration Successful:', response.data);
+                // Navigate to login or dashboard page after successful signup
+                navigate('/login');
+            } catch (error) {
+                // Handle error response
+                console.error('Error registering user:', error.response.data);
+            }
         };
+        
+
         const navigate = useNavigate();
            const handleLogin = () => {
         navigate('/login');

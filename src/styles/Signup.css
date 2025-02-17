@@ -82,6 +82,7 @@ input {
 
 .btn:hover {
     background-color: #5248c7;
+    color: white;
 }
 
 a {

@@ -34,8 +34,6 @@
     animation: zoomEffect 20s infinite alternate ease-in-out;
   }
   
-  
-
   .overlay {
     position: absolute;
     top: 0;
