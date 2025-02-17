@@ -19,7 +19,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setError, // To manually set error for email and password
+    setError,
     reset,
   } = useForm({
     resolver: yupResolver(loginSchema),
@@ -29,17 +29,17 @@ const LoginForm = () => {
     console.log("Logging in with:", data);
 
     axios
-      .post(`${API.BASE_URL}/api/auth/login`, data, {
+      .post(`${API.BASE_URL}/users/login`, data, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
-        console.log("Login Response:", response.data.data.access_token);
+        console.log("Login Response:", response.data);
 
-        if (response.data && response.data.data.access_token) {
-          console.log("Access Token:", response.data.data.access_token);
-          localStorage.setItem("token", response.data.data.access_token);
+        if (response.data && response.data.token) {
+          console.log("Access Token:", response.data.token);
+          localStorage.setItem("token", response.data.token);
           navigate("/mainpage");
         } else {
           alert("Login failed! Check credentials");
@@ -97,12 +97,12 @@ const LoginForm = () => {
             <input type="password" {...register("password")} />
             <p className="error-text">{errors.password?.message}</p>
 
-            <p>
+            {/* <p>
               Forgot password?{" "}
               <button type="button" onClick={() => navigate("/resetPassword")}>
                 Reset Password
               </button>
-            </p>
+            </p> */}
 
             <button type="submit" className="btn-login">Login</button>
 
