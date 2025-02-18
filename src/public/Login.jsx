@@ -50,6 +50,7 @@ const LoginForm = () => {
           }
 
           localStorage.setItem("token", response.data.token);
+          localStorage.setItem("userDetails", JSON.stringify(response.data.userDetails)); 
 
           navigate("/mainpage");
           window.location.reload();

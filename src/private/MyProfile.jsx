@@ -1,49 +1,122 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import "../styles/MyProfile.css";
 
+// Yup schema for validation
 const schema = Yup.object().shape({
-  fullname: Yup.string().required("Full Name is required"),
-  DOB: Yup.date().required("Date of Birth is required"),
+  fullName: Yup.string().required("Full Name is required"),
+  dob: Yup.date().required("Date of Birth is required"),
   email: Yup.string().email("Invalid email format").required("Email is required"),
   address: Yup.string().required("Address is required"),
-  contact: Yup.string().required("Contact is required"),
 });
 
 const ProfilePage = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [editing, setEditing] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false); 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (token) {
+      axios
+        .get("http://localhost:5001/users/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          const data = response.data;
+          setUserData(data);
+
+          const formattedDob = data.dob ? data.dob.split("T")[0] : '';
+
+          reset({
+            fullName: data.fullName || '',
+            dob: formattedDob, // Use the formatted date here
+            email: data.email || '',
+            address: data.address || '',
+          });
+
+          setProfilePic(data.profilePic ? `http://localhost:5001/${data.profilePic}` : null);
+
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching profile data:", error);
+          setLoading(false);
+        });
+    }
+  }, [token, reset]);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setProfilePic(reader.result);
+        setProfilePic(reader.result); // Store the image as a base64 string temporarily
       };
       reader.readAsDataURL(file);
     }
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("Submitting data:", data);
     setEditing(false);
+
+    const formData = new FormData();
+    formData.append("fullName", data.fullName);
+    formData.append("dob", data.dob);
+    formData.append("email", data.email);
+    formData.append("address", data.address);
+    
+    // Include the profilePic if it exists as a file object
+    const profilePicFile = document.querySelector("#profile-upload").files[0];
+    if (profilePicFile) {
+      formData.append("profilePic", profilePicFile);
+    }
+
+    axios
+      .put("http://localhost:5001/users/profile", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log("Updated profile data:", response.data);
+        // Ensure the profile data is updated in both state and form
+        const updatedUser = response.data.user;
+        setUserData(updatedUser);  // Update userData state
+        setProfilePic(updatedUser.profilePic ? `http://localhost:5001/${updatedUser.profilePic}` : null);
+        
+        // Manually reset the form with the updated data
+        reset({
+          fullName: updatedUser.fullName,
+          dob: updatedUser.dob ? updatedUser.dob.split("T")[0] : "",
+          email: updatedUser.email,
+          address: updatedUser.address,
+        });
+        
+      })
+      .catch((error) => {
+        console.error("Error updating profile:", error);
+      });
   };
 
   const handleCancel = () => {
     setEditing(false);
-    reset();
+    reset(userData); // Revert to original data if canceled
   };
 
   const handleLogoutClick = () => {
@@ -51,6 +124,7 @@ const ProfilePage = () => {
   };
 
   const handleLogoutConfirm = () => {
+    localStorage.removeItem("token");
     navigate("/login");
     setShowModal(false);
   };
@@ -63,6 +137,10 @@ const ProfilePage = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="container">
       {/* Sidebar */}
@@ -71,9 +149,6 @@ const ProfilePage = () => {
         <button onClick={() => navigate('/myorders')}>
           <img src="src/pictures/orders-icon.png" className="icon" alt="Orders" /> My Orders
         </button>
-        {/* <button onClick={() => navigate('/favorites')}>
-          <img src="src/pictures/favorites-icon.png" className="icon" alt="Favorites" /> Favorites
-        </button> */}
         <button onClick={() => navigate('/mytable')}>
           <img src="src/pictures/table-icon.png" className="icon" alt="Table" /> My Table
         </button>
@@ -115,33 +190,27 @@ const ProfilePage = () => {
               <form onSubmit={handleSubmit(onSubmit)} className="edit-form">
                 <div className="form-group">
                   <label>Name</label>
-                  <input {...register("fullname")} />
+                  <input type="text" {...register("fullName")} />
                 </div>
-                <p className="error">{errors.fullname?.message}</p>
+                <p className="error">{errors.fullName?.message}</p>
 
                 <div className="form-group">
                   <label>DOB</label>
-                  <input type="date" {...register("DOB")} />
+                  <input type="date" {...register("dob")} />
                 </div>
-                <p className="error">{errors.DOB?.message}</p>
+                <p className="error">{errors.dob?.message}</p>
 
                 <div className="form-group">
                   <label>Email</label>
-                  <input {...register("email")} />
+                  <input type="email" {...register("email")} />
                 </div>
                 <p className="error">{errors.email?.message}</p>
 
                 <div className="form-group">
                   <label>Address</label>
-                  <input {...register("address")} />
+                  <input type="text" {...register("address")} />
                 </div>
                 <p className="error">{errors.address?.message}</p>
-
-                <div className="form-group">
-                  <label>Contact</label>
-                  <input {...register("contact")} />
-                </div>
-                <p className="error">{errors.contact?.message}</p>
 
                 <div className="form-buttons">
                   <button type="submit" className="save-btn">Save Changes</button>
@@ -150,9 +219,9 @@ const ProfilePage = () => {
               </form>
             ) : (
               <div className="user-details">
-                <h2>John Doe</h2>
-                <p>johndoe@example.com</p>
-                <p>123-456-7890</p>
+                <h2>{userData.fullName}</h2>
+                <p>{userData.email}</p>
+                <p>{userData.address}</p>
                 <button className="edit-btn" onClick={() => setEditing(true)}>Edit Profile</button>
               </div>
             )}
