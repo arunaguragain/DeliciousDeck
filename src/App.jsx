@@ -17,6 +17,7 @@ function App() {
   const MyOrders = React.lazy(() => import('./private/MyOrder.jsx'));
   const OrderDetailsModal = React.lazy(() => import('./private/OrderDetailsModel.jsx'));
   const AdminPage = React.lazy(() => import('./private/AdminPage.jsx'));
+  const MenuManagement = React.lazy(() => import("./private/MenuManagement.jsx"))
  
   return (
     <Router>
@@ -38,6 +39,7 @@ function App() {
          <Route path='/myorders' element={<MyOrders/>}></Route>
          <Route path='/orderdetailsmodel' element={<OrderDetailsModal/>}></Route>
          <Route path='/adminpage' element={<AdminPage/>}></Route>
+         <Route path='/menumanagement' element={<MenuManagement/>}></Route>
         </Routes>
       </Suspense>
     </Router>
