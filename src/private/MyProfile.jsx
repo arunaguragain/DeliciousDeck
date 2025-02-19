@@ -48,7 +48,7 @@ const ProfilePage = () => {
             address: data.address || '',
           });
 
-          setProfilePic(data.profilePic ? `http://localhost:5001/${data.profilePic}` : null);
+          setProfilePic(data.profilePicture ? `http://localhost:5001/${data.profilePicture}` : null);
 
           setLoading(false);
         })
@@ -98,7 +98,7 @@ const ProfilePage = () => {
         // Ensure the profile data is updated in both state and form
         const updatedUser = response.data.user;
         setUserData(updatedUser);  // Update userData state
-        setProfilePic(updatedUser.profilePic ? `http://localhost:5001/${updatedUser.profilePic}` : null);
+        setProfilePic(updatedUser.profilePicture ? `http://localhost:5001/${updatedUser.profilePicture}` : null);
         
         // Manually reset the form with the updated data
         reset({

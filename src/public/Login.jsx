@@ -52,8 +52,6 @@ const LoginForm = () => {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("userDetails", JSON.stringify(response.data.userDetails)); 
 
-          localStorage.setItem("userEmail", data.email); 
-
           navigate("/mainpage");
           window.location.reload();
         } else {
