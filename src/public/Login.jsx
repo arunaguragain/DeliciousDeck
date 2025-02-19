@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../environment";
+
 import "../styles/Login.css";
 
 const LoginForm = () => {
@@ -33,7 +34,7 @@ const LoginForm = () => {
       .post(`${API.BASE_URL}/users/login`, data, {
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          "Accept": "application/json",
         },
       })
       .then((response) => {
@@ -42,18 +43,21 @@ const LoginForm = () => {
         if (response.data && response.data.token) {
           console.log("Access Token:", response.data.token);
 
-          if (response.data.userId) {
-            console.log("User ID:", response.data.userId);
-            localStorage.setItem("userId", response.data.userId);
+          // Store user details and token
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("userId", response.data.userId);
+          localStorage.setItem("userDetails", JSON.stringify(response.data.userDetails));
+
+          // Store role from the response directly (no need to decode the JWT)
+          const role = response.data.role;
+
+          if (role === "admin") {
+            navigate("/adminpage"); // Navigate to admin dashboard
           } else {
-            console.warn("Warning: userId is missing from the response!");
+            navigate("/mainpage"); // Regular user dashboard
           }
 
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("userDetails", JSON.stringify(response.data.userDetails)); 
-
-          navigate("/mainpage");
-          window.location.reload();
+          window.location.reload(); // Optional to reload the page for any fresh state
         } else {
           alert("Login failed! Check credentials");
         }
@@ -109,13 +113,6 @@ const LoginForm = () => {
             <label>Password</label>
             <input type="password" {...register("password")} />
             <p className="error-text">{errors.password?.message}</p>
-
-            {/* <p>
-              Forgot password?{" "}
-              <button type="button" onClick={() => navigate("/resetPassword")}>
-                Reset Password
-              </button>
-            </p> */}
 
             <button type="submit" className="btn-login">Login</button>
 

@@ -8,6 +8,7 @@ const MyOrders = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
 
+
   const navigate = useNavigate();
 
   // Fetch orders from localStorage
@@ -51,7 +52,6 @@ const MyOrders = () => {
                 <th>Order ID</th>
                 <th>Date</th>
                 <th>Total</th>
-                <th>Status</th>
                 <th>Details</th>
               </tr>
             </thead>
@@ -61,14 +61,6 @@ const MyOrders = () => {
                   <td>{order.id}</td>
                   <td>{new Date(order.date).toLocaleDateString()}</td>
                   <td>Rs. {order.total}</td>
-                  <td>
-                    {/* Check if the order is Out for Delivery */}
-                    {order.status === "Out for Delivery" ? (
-                      "Your order will be delivered soon"
-                    ) : (
-                      order.status
-                    )}
-                  </td>
                   <td>
                     <button onClick={() => openModal(order)}>View Details</button>
                   </td>
