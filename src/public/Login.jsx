@@ -47,6 +47,12 @@ const LoginForm = () => {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("userId", response.data.userId);
           localStorage.setItem("userDetails", JSON.stringify(response.data.userDetails));
+          localStorage.setItem("user", JSON.stringify({
+            token: response.data.token,
+            userId: response.data.userId,
+            role: response.data.role,
+            userDetails: response.data.userDetails,
+          }));
 
           // Store role from the response directly (no need to decode the JWT)
           const role = response.data.role;
@@ -57,7 +63,7 @@ const LoginForm = () => {
             navigate("/mainpage"); // Regular user dashboard
           }
 
-          window.location.reload(); // Optional to reload the page for any fresh state
+          // window.location.reload(); // Optional to reload the page for any fresh state
         } else {
           alert("Login failed! Check credentials");
         }
@@ -94,7 +100,7 @@ const LoginForm = () => {
 
     reset();
   };
-
+ 
   return (
     <div className="login-main">
       <div className="login-nav">
