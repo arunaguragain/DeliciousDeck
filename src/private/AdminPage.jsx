@@ -7,11 +7,18 @@ import { useNavigate } from "react-router-dom";
 const AdminPage = () => {
   const navigate = useNavigate();
 
-  // Logout function (Example)
+  // Logout function
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Remove token on logout
+    // Remove all user-related data from localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userDetails");
+    localStorage.removeItem("user");
+
+    // Alert user
     alert("Logging out...");
-    // Redirect to login page after logging out
+
+    // Redirect to login page
     navigate("/login");
   };
 
@@ -23,10 +30,6 @@ const AdminPage = () => {
         <ul className="list-unstyled">
           <SidebarItem icon={<FaHome />} text="Dashboard" onClick={() => navigate("/adminpage")} />
           <SidebarItem icon={<FaList />} text="Menu Management" onClick={() => navigate("/menumanagement")} />
-          <SidebarItem icon={<FaShoppingCart />} text="Orders" onClick={() => navigate("/orderManagement")} />
-          <SidebarItem icon={<FaUsers />} text="Users" onClick={() => navigate("/userManagement")} />
-          <SidebarItem icon={<FaChartBar />} text="Analytics" onClick={() => navigate("/analytics")} />
-          <SidebarItem icon={<FaCog />} text="Settings" onClick={() => navigate("/settings")} />
           <SidebarItem icon={<FaSignOutAlt />} text="Logout" onClick={handleLogout} />
         </ul>
       </div>

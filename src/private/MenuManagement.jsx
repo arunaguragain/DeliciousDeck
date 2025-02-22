@@ -84,11 +84,6 @@ const MenuManagement = () => {
         <ul className="list-unstyled">
           <SidebarItem icon={<FaHome />} text="Dashboard" onClick={() => navigate("/adminpage")} />
           <SidebarItem icon={<FaList />} text="Menu Management" onClick={() => navigate("/menumanagement")} />
-          <SidebarItem icon={<FaShoppingCart />} text="Orders" onClick={() => navigate("/orderManagement")} />
-          <SidebarItem icon={<FaUsers />} text="Users" onClick={() => navigate("/userManagement")} />
-          <SidebarItem icon={<FaChartBar />} text="Analytics" onClick={() => navigate("/analytics")} />
-          <SidebarItem icon={<FaCog />} text="Settings" onClick={() => navigate("/settings")} />
-          <SidebarItem icon={<FaSignOutAlt />} text="Logout" onClick={() => alert("Logging out...")} />
         </ul>
       </div>
 
