@@ -45,7 +45,7 @@ body {
 .menu-container {
   background-image: url('../pictures/card.png');
   padding: 70px;
-  max-width: 1500px;
+  max-width: 1700px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

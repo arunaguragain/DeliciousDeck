@@ -55,7 +55,6 @@ body {
     transition: 0.3s;
     padding-top: 60px;
     z-index: 1000;
-    
   }
   
   .sidebar.visible {
@@ -85,20 +84,6 @@ body {
   .sidebar button:hover {
     background-color: #575757;
   }
-  
-  /* .contents {
-    padding: 40px;
-    text-align: center;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    background: url('../pictures/home.png') no-repeat, linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)); 
-    background-size: cover;
-    height: 100%;
-  } */
 
   .contents {
     padding: 40px;

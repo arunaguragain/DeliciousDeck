@@ -63,7 +63,7 @@ const LoginForm = () => {
             navigate("/mainpage"); // Regular user dashboard
           }
 
-          // window.location.reload(); // Optional to reload the page for any fresh state
+          window.location.reload(); // Optional to reload the page for any fresh state
         } else {
           alert("Login failed! Check credentials");
         }

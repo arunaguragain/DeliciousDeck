@@ -20,6 +20,7 @@ const AdminPage = () => {
 
     // Redirect to login page
     navigate("/login");
+    window.location.reload(); //
   };
 
   return (
